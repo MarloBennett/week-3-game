@@ -1,5 +1,5 @@
 // Sets the computer choices 
-var wordBank = ["doberman", "labrador", "beagle", "bulldog", "akita", "husky", "pomeranian", "yorkie", "mastiff", "pug", "malamute", "collie", "bloodhound", "boxer", "sheepdog", "chihuahua", "dalmation", "greyhound"];
+var wordBank = ["doberman", "labrador", "beagle", "bulldog", "akita", "husky", "pomeranian", "yorkie", "mastiff", "pug", "malamute", "collie", "bloodhound", "boxer", "sheepdog", "dalmation", "greyhound"];
 
 // Declares the tallies to 0 
 var wins = 0;
@@ -16,10 +16,11 @@ document.onkeyup = function(event) {
 
 	var hangmanWord = getHangmanWord(lettersGuessed);	
 
+		//Taking the tallies and displaying them in HTML
 	var html = 
-	//	"<p>Press any letter key to start playing.</p>" +
+		"<p>Press any letter key to start playing.</p>" +
 		"<p>Letters guessed: " + lettersGuessed+ "</p>" +
-		"<p>Hangman word: " + hangmanWord + "</p>"
+		"<p>Hangman word: " + hangmanWord + "</p>" +
 		"<p>wins: " + wins + "</p>";
 	
 	if (lettersGuessed.length > currentWord.length + 10) {
@@ -30,8 +31,6 @@ document.onkeyup = function(event) {
 		wins++;
 	} 
 	console.log("wins:" + wins);
-
-		//Taking the tallies and displaying them in HTML
 	
 	// Placing the html into the game ID
 	document.querySelector("#game").innerHTML = html;
@@ -43,12 +42,13 @@ document.onkeyup = function(event) {
 function getHangmanWord(lettersGuessed) {
 	
 	var hangmanWord = "";
+
 	// Iterate over all the letters in the current word
-	for(i=0; i<currentWord.length;i++) {
+	for (i = 0; i < currentWord.length; i++) {
 		var currentWordLetter = currentWord[i];
 
 		// If the current word letter is in the string of letters guessed...
-		if(	lettersGuessed.indexOf(currentWordLetter) >-1 ) {
+		if (lettersGuessed.indexOf(currentWordLetter) > -1 ) {
 			hangmanWord = hangmanWord + currentWordLetter;
 		}
 		// else the letter hasn't been guessed so add a dash
