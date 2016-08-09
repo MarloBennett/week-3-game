@@ -7,11 +7,13 @@ var lettersGuessed = "";
 
 var currentWord = wordBank[Math.floor(Math.random() * wordBank.length)];
 
+var guessesRemaining = currentWord.length + 10;
+
+
 // When the user presses the key it records the keypress and then sets it to userguess
 document.onkeyup = function(event) {
 	var currentLetterGuessed = String.fromCharCode(event.keyCode).toLowerCase();
 	lettersGuessed = lettersGuessed + currentLetterGuessed;
-	var guessesRemaining = currentWord.length + 10;
 
 	console.log(currentWord);
 
@@ -22,15 +24,15 @@ document.onkeyup = function(event) {
 		"<p>Press any letter key to start playing.</p>" +
 		"<p>Letters guessed: " + lettersGuessed + "</p>" +
 		"<p>Hangman word: " + hangmanWord + "</p>" +
-		"<p>Guesses remaining: " + guessesRemaining + "</p>" + 
-		"<p>wins: " + wins + "</p>";
+		"<p>Guesses remaining: " + guessesRemaining + "</p>"; 
 
 	if (lettersGuessed.length > currentWord.length + 10) {
 		html = html + "The man is hanged! You lose."
 	}
 	else if (hangmanWord.indexOf("-") < 0) {
-		html = html + "<p>You win!!!</p>";
 		wins++;
+		html = html + "<p>You win!!!</p>" +
+		"<p>Wins: " + wins + "</p>";
 	} 
 	console.log("wins:" + wins);
 	
@@ -38,6 +40,7 @@ document.onkeyup = function(event) {
 	document.querySelector("#game").innerHTML = html;
 
 }
+
 
 function getHangmanWord(lettersGuessed) {
 	
@@ -56,7 +59,6 @@ function getHangmanWord(lettersGuessed) {
 			hangmanWord = hangmanWord + "-";	
 		}
 	}
-
+	
 	return hangmanWord;
-
 }
