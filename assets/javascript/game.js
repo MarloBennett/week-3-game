@@ -7,8 +7,8 @@ var lettersGuessed = "";
 
 var currentWord = wordBank[Math.floor(Math.random() * wordBank.length)];
 
-var guessesRemaining = currentWord.length + 10;
 
+var guessesRemaining = currentWord.length + 6;
 
 // When the user presses the key it records the keypress and then sets it to userguess
 document.onkeyup = function(event) {
@@ -26,20 +26,22 @@ document.onkeyup = function(event) {
 		"<p>Hangman word: " + hangmanWord + "</p>" +
 		"<p>Guesses remaining: " + guessesRemaining + "</p>"; 
 
-	if (lettersGuessed.length > currentWord.length + 10) {
-		html = html + "The man is hanged! You lose."
+	if (lettersGuessed.length > currentWord.length + 7) {
+		html = html + "The man is hanged! You lose.";
+		setTimeout(function() {location.reload()}, 1000);
 	}
-	else if (hangmanWord.indexOf("-") < 0) {
+	else if (hangmanWord.indexOf("_") < 0) {
 		wins++;
-		html = html + "<p>You win!!!</p>" +
+		html = html + "<p>You win!</p>" +
 		"<p>Wins: " + wins + "</p>";
+		setTimeout(function() {location.reload()}, 1000);
 	} 
 	console.log("wins:" + wins);
 	
 	// Placing the html into the game ID
 	document.querySelector("#game").innerHTML = html;
 
-}
+
 
 
 function getHangmanWord(lettersGuessed) {
@@ -56,9 +58,12 @@ function getHangmanWord(lettersGuessed) {
 		}
 		// else the letter hasn't been guessed so add a dash
 		else {
-			hangmanWord = hangmanWord + "-";	
+			hangmanWord = hangmanWord + "_";
+			guessesRemaining --;
+			console.log(guessesRemaining);
 		}
 	}
 	
 	return hangmanWord;
+}
 }
