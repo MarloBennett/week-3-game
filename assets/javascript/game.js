@@ -7,8 +7,7 @@ var lettersGuessed = "";
 
 var currentWord = wordBank[Math.floor(Math.random() * wordBank.length)];
 
-
-var guessesRemaining = currentWord.length + 6;
+var guessesRemaining = currentWord.length + 7;
 
 // When the user presses the key it records the keypress and then sets it to userguess
 document.onkeyup = function(event) {
@@ -26,15 +25,15 @@ document.onkeyup = function(event) {
 		"<p>Hangman word: " + hangmanWord + "</p>" +
 		"<p>Guesses remaining: " + guessesRemaining + "</p>"; 
 
-	if (lettersGuessed.length > currentWord.length + 7) {
+	if (lettersGuessed.length > currentWord.length + 6) {
 		html = html + "The man is hanged! You lose.";
-		setTimeout(function() {location.reload()}, 1000);
+		setTimeout(function() {location.reload(false)}, 3000);
 	}
 	else if (hangmanWord.indexOf("_") < 0) {
 		wins++;
 		html = html + "<p>You win!</p>" +
 		"<p>Wins: " + wins + "</p>";
-		setTimeout(function() {location.reload()}, 1000);
+		setTimeout(function() {location.reload(false)}, 3000);
 	} 
 	console.log("wins:" + wins);
 	
@@ -58,11 +57,10 @@ function getHangmanWord(lettersGuessed) {
 		}
 		// else the letter hasn't been guessed so add a dash
 		else {
-			hangmanWord = hangmanWord + "_";
-			guessesRemaining --;
-			console.log(guessesRemaining);
+			hangmanWord = hangmanWord + "_ ";
 		}
 	}
+	guessesRemaining--;
 	
 	return hangmanWord;
 }
