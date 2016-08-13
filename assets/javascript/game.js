@@ -58,17 +58,17 @@ document.onkeyup = function(event) {
 	} 
 	// else, if the letter has already been chosen, tell them and dont't add to letters chosen
 	else if (lettersGuessed.indexOf(currentLetterGuessed)>-1) {
-		msg = "<p>You already tried that letter! Please choose a different letter.</p>"
+		msg = "<p>You already tried that letter! Please choose a different letter.</p>";
 	}
 	// otherwise, the letter is a valid guess
 	else {
 		// Check if the letter is in the word. Tell them if not. Remove a guess if not.
 		if(currentWord.indexOf(currentLetterGuessed)<0) {
-			msg = "Sorry! Your man is one part closer to being hanged.";	
+			msg = "<p>Sorry! Your man is one part closer to being hanged.</p>";	
 			guessesRemaining--;
 		}
 		else {
-			msg = "Good call!";	
+			msg = "<p>Good call!</p>";	
 		}
 		
 		lettersGuessed = lettersGuessed + currentLetterGuessed;
@@ -86,16 +86,17 @@ function updateGame() {
 	var hangmanWord = getHangmanWord(lettersGuessed);	
 
 		//Taking the tallies and displaying them in HTML
-	var html = msg + 
+	var html = 
 		"<p>Letters guessed: " + lettersGuessed + "</p>" +
 		"<p>Hangman word: " + hangmanWord + "</p>" +
-		"<p>Guesses remaining: " + guessesRemaining + "</p>";
+		"<p>Guesses remaining: " + guessesRemaining + "</p>" +
+		msg;
 
 	// Check if the player won
 	if (hangmanWord.indexOf("_") < 0) {
 		wins++;
 		html = html + "<p>You win! Press any key to start a new game.</p>" +
-					"<p>Wins:" + wins;
+					"<p>Wins: " + wins;
 		restartGame = true;
 	} 
 	// Check if the player lost

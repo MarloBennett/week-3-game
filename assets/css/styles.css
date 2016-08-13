@@ -1,0 +1,26 @@
+body {
+	background-image: url("../images/congruent_pentagon.png");
+}
+
+h1 {
+	font-family: 'Bungee Inline', sans-serif;
+	font-size: 150px;
+	text-align: center;
+	color: #009973;
+}
+
+h2 {
+	font-family: 'Lobster', cursive;
+	font-size: 100px;
+	color: #004d39;
+	text-align: center;
+	line-height: 0%;
+}
+
+.col-md-12 {
+	margin-bottom: 35px;
+}
+
+#main-content {
+	padding-top: 50px;
+}
