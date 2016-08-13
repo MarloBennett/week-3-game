@@ -14,7 +14,7 @@ var guessesRemaining;
 
 var msg = "";
 
-// Init the first game when the page is loaded
+// calls the function to initialize the first game when the page is loaded
 initializeNewGame();
 
 //Initializes a new game
@@ -40,7 +40,7 @@ function initializeNewGame() {
 }
 
 
-// When the user presses the key it records the keypress and then sets it to userguess
+// When the user presses the key it records the keypress and then sets it to currentletterguessed
 document.onkeyup = function(event) {
 	
 	if (restartGame) {
@@ -54,14 +54,14 @@ document.onkeyup = function(event) {
 	if (!(currentLetterGuessed.match(/[a-z]/i))) { 
 		msg = "<p>Your choice is not a letter!</p>";
 	} 
-	// else, if the letter has already been chosen, tell them and dont't add to letters chosen
-	else if (lettersGuessed.indexOf(currentLetterGuessed)>-1) {
+	// else, if the letter has already been chosen, tell them and don't add to letters chosen
+	else if (lettersGuessed.indexOf(currentLetterGuessed) > -1) {
 		msg = "<p>You already tried that letter! Please choose a different letter.</p>";
 	}
 	// otherwise, the letter is a valid guess
 	else {
 		// Check if the letter is in the word. Tell them if not. Remove a guess if not.
-		if(currentWord.indexOf(currentLetterGuessed)<0) {
+		if (currentWord.indexOf(currentLetterGuessed) < 0) {
 			msg = "<p>Sorry! Your man is one part closer to being hanged.</p>";	
 			guessesRemaining--;
 		}
@@ -79,27 +79,31 @@ document.onkeyup = function(event) {
 
 function updateGame() {
 
-	console.log("Upating game");
-
 	var hangmanWord = getHangmanWord(lettersGuessed);	
 
-		//replaces the html in the html file
+		//supplies the text that will be replaced in the html file
 	var html = 
+		"<p>Press any letter key to start playing.</p>" +
 		"<p>Letters guessed: " + lettersGuessed + "</p>" +
-		"<p>Hangman word: " + hangmanWord + "</p>" +
+		"<p>" + hangmanWord + "</p>" +
 		"<p>Guesses remaining: " + guessesRemaining + "</p>" +
 		msg;
 
 	// Check if the player won
 	if (hangmanWord.indexOf("_") < 0) {
 		wins++;
-		html = html + "<p>You win! Press any key to start a new game.</p>" +
+		html = 
+			"<p>" + hangmanWord + "</p>" + 
+			"<p>You win! Press any key to start a new game.</p>" +
 					"<p>Wins: " + wins;
 		restartGame = true;
 	} 
 	// Check if the player lost
-	else if (guessesRemaining < 1){
-		html = html + "<p>Your man is hanged! Press any key to start a new game.</p>"
+	else if (guessesRemaining < 1) {
+		html = 
+		"<p>Letters guessed: " + lettersGuessed + "</p>" +
+		"<p>The word was: " + currentWord + "</p>" +
+		"<p>Your man is hanged! Press any key to start a new game.</p>";
 		restartGame = true;
 	}
 	// Otherwise, keep going
