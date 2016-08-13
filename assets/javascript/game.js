@@ -20,8 +20,6 @@ initializeNewGame();
 //Initializes a new game
 function initializeNewGame() {
 
-	console.log("Initializing new game");
-
 	restartGame = false;
 
 	// Choose the word to be guessed
@@ -85,7 +83,7 @@ function updateGame() {
 
 	var hangmanWord = getHangmanWord(lettersGuessed);	
 
-		//Taking the tallies and displaying them in HTML
+		//replaces the html in the html file
 	var html = 
 		"<p>Letters guessed: " + lettersGuessed + "</p>" +
 		"<p>Hangman word: " + hangmanWord + "</p>" +
